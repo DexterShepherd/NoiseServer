@@ -17,6 +17,7 @@ public:
     wave(float _x, float _y, float _width, float _inc, int _numPoints);
     void update();
     void draw();
+    float getNoise(){return value/width;};
 private:
     float x;
     float xOff;

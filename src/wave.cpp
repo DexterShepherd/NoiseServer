@@ -39,7 +39,7 @@ void wave::draw(){
     }
     for(int i = 0; i < 10; i++){
         ofSetColor(ofMap(history[i*(ofGetHeight()/10)], 0, width, 0, 255), 100);
-        ofRect(0, i*(ofGetHeight()/10), width, ofGetHeight()/10);
+        ofRect(0, i*(ofGetHeight()/10)+1, width+1, ofGetHeight()/10);
     }
     
     ofPopMatrix();

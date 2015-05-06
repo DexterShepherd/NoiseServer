@@ -2,8 +2,9 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-   // ofSetBackgroundAuto(false);
     ofBackground(0);
+    ofSetFrameRate(24);
+    OscOut.setup("localhost", 8888);
     numClients = 10;
     waves = new wave*[numClients];
     for(int i = 0; i < numClients; i++){
@@ -19,6 +20,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     drawWave();
+    sendNoise();
 }
 
 void ofApp::updateWave(){
@@ -33,3 +35,12 @@ void ofApp::drawWave(){
     }
 }
 
+void ofApp::sendNoise(){
+    ofxOscMessage m;
+    m.setAddress("/ripplesRaw");
+    m.addIntArg(numClients);
+    for(int i = 0; i < numClients; i++){
+        m.addFloatArg(waves[i]->getNoise());
+    }
+    OscOut.sendMessage(m);
+}
